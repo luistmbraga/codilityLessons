@@ -1,0 +1,26 @@
+// you can also use imports, for example:
+// import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public boolean solution(int[] A) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        boolean result = true;
+
+        if(A.length % 2 == 0){
+            for(int elem: A){
+                if(map.containsKey(elem)) map.replace(elem, map.get(elem) +1);
+                else map.put(elem, 1);
+            }
+
+            for(int elem: map.values()){
+                if(elem%2 != 0) return false;
+            }
+        }else result = false;
+
+        return result;
+    }
+}
