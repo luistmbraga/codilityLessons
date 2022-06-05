@@ -1,0 +1,89 @@
+// you can also use imports, for example:
+// import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    private Map<Character, Integer> nucleotides;
+
+    public Solution(){
+        this.nucleotides = new HashMap<Character, Integer>();
+        this.nucleotides.put('A', 1);
+        this.nucleotides.put('C', 2);
+        this.nucleotides.put('G', 3);
+        this.nucleotides.put('T', 4);
+    }
+
+    public void countFrequencies(int[] As, int[] Cs, int[] Gs, String S, int len){
+        for(int i = 0; i < len; i++){
+            char nucleotide = S.charAt(i);
+
+            switch(nucleotide){
+                case 'A':
+                    if(i!=0){
+                        As[i] = As[i-1] + 1;
+                        Cs[i] = Cs[i-1];
+                        Gs[i] = Gs[i-1];
+                    }else As[i] = 1;
+                    break;
+                case 'C':
+                    if(i!=0){
+                        As[i] = As[i-1];
+                        Cs[i] = Cs[i-1] + 1;
+                        Gs[i] = Gs[i-1];
+                    }else Cs[i] = 1;
+                    break;
+                case 'G':
+                    if(i!=0){
+                        As[i] = As[i-1];
+                        Cs[i] = Cs[i-1];
+                        Gs[i] = Gs[i-1] + 1;
+                    }else Gs[i] = 1;
+                    break;
+                case 'T':
+                    if(i!=0){
+                        As[i] = As[i-1];
+                        Cs[i] = Cs[i-1];
+                        Gs[i] = Gs[i-1];
+                    }
+                    break;
+            }
+        }
+    }
+
+    public int[] solution(String S, int[] P, int[] Q) {
+        int len = S.length();
+        int[] As = new int[len];
+        int[] Cs = new int[len];
+        int[] Gs = new int[len];
+        int[] result =  new int[P.length];
+
+        this.countFrequencies(As, Cs, Gs, S, len);
+
+        for(int i = 0; i < P.length; i++){
+            int begin = P[i];
+            int end = Q[i];
+
+            if(begin == end){
+                result[i] = this.nucleotides.get(S.charAt(end));
+                continue;
+            }
+
+            if(begin == 0){
+                if(As[end] != 0) result[i] = this.nucleotides.get('A');
+                else if(Cs[end] != 0) result[i] = this.nucleotides.get('C');
+                else if(Gs[end] != 0) result[i] = this.nucleotides.get('G');
+                else result[i] = this.nucleotides.get('T');
+            }else{
+                if(As[end] - As[begin-1] != 0) result[i] = this.nucleotides.get('A');
+                else if(Cs[end] - Cs[begin-1] != 0) result[i] = this.nucleotides.get('C');
+                else if(Gs[end] - Gs[begin-1] != 0) result[i] = this.nucleotides.get('G');
+                else result[i] = this.nucleotides.get('T');
+            }
+        }
+
+        return result;
+    }
+}
