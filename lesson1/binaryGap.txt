@@ -1,0 +1,26 @@
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int N) {
+        int maxgap = 0;
+        int gap = 0;
+        boolean firstone = false;
+
+        while(N > 0){
+            boolean div2 = (N%2) == 0;
+            if(div2 && firstone) gap++;
+            if(!div2 && !firstone) firstone = true;
+            if(!div2 && firstone){
+                if(gap > maxgap) maxgap = gap;
+                gap = 0;
+            }
+            N /= 2;
+        }
+
+        return maxgap;
+    }
+}
