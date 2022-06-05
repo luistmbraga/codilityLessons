@@ -1,0 +1,26 @@
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        int leftsum = 0;
+        int rightsum = 0;
+        int len = 0;
+        int mindiff = Integer.MAX_VALUE;
+
+        for(int elem: A){ rightsum+=elem; len++;}
+
+        for(int i = 0; i < len-1; i++){
+            int elem = A[i];
+            leftsum+=elem;
+            rightsum-=elem;
+            int diff = Math.abs(leftsum-rightsum);
+            if(diff < mindiff) mindiff = diff;
+        }
+
+        return mindiff;
+    }
+}
