@@ -1,0 +1,19 @@
+// you can also use imports, for example:
+// import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+        for(int elem: A){
+            if(map.containsKey(elem)) map.remove(elem);
+            else map.put(elem, elem);
+        }
+
+        return map.entrySet().iterator().next().getKey();
+    }
+}
