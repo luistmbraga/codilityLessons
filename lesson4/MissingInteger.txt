@@ -1,0 +1,41 @@
+// you can also use imports, for example:
+// import java.util.*;
+import java.util.Set;
+import java.util.HashSet;
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        Set<Integer> positives = new HashSet<>();
+        int smallestinteger = 1;
+        int maxvalue = 0;
+        boolean allnegatives = true;
+        boolean foundsmallest = false;
+
+        for(int elem: A){
+            if(elem > 0){
+                allnegatives = false;
+                if(!positives.contains(elem)){
+                    positives.add(elem);
+                    if(elem > maxvalue) maxvalue = elem;
+                }
+            }
+        }
+
+        if(!allnegatives){
+            for(int i = 1; i < maxvalue && !foundsmallest; i++){
+                if(!positives.contains(i)){
+                    foundsmallest = true;
+                    smallestinteger = i;
+                }
+            }
+
+            if(!foundsmallest)
+                smallestinteger = maxvalue +1;
+        }
+
+
+        return smallestinteger;
+    }
+}

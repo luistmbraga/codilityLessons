@@ -1,0 +1,27 @@
+// you can also use imports, for example:
+// import java.util.*;
+import java.util.Set;
+import java.util.HashSet;
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        int ispermutation = 1;
+        int maxvalue = 0;
+        Set<Integer> numbers = new HashSet<>();
+
+        for(int i = 0; i < A.length && ispermutation == 1; i++){
+            int elem = A[i];
+            if(!numbers.contains(elem)) numbers.add(elem);
+            else ispermutation = 0;
+            if(elem > maxvalue) maxvalue = elem;
+        }
+
+        for(int i = 1; i < maxvalue && ispermutation == 1; i++){
+            if(!numbers.contains(i)) ispermutation = 0;
+        }
+
+        return ispermutation; 
+    }
+}
