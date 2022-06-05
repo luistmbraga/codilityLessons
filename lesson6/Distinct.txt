@@ -1,0 +1,18 @@
+// you can also use imports, for example:
+// import java.util.*;
+import java.util.Set;
+import java.util.HashSet;
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        Set<Integer> set = new HashSet<Integer>();
+
+        for(int elem: A){
+            if(!set.contains(elem)) set.add(elem);
+        }
+
+        return set.size();
+    }
+}
